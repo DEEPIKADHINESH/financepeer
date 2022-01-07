@@ -3,14 +3,14 @@ import data from "../data.json";
 class Data extends Component{
     render(){
         return(
-            <div>
-                <div classNmae="table ">
+        <div>
+        <div className="table ">
                     <thead>
                         <tr>
-                        <th>userid</th> 
+                        <th>Userid</th> 
                         <th>id</th>
-                        <th>title</th>
-                        <th>body</th>
+                        <th>Title</th>
+                        <th>Body</th>
                         </tr>
                     </thead>
                     <tbody>
