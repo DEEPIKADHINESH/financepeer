@@ -1,11 +1,12 @@
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import React from "react";
 function Navbar(){
     return(
-        <div>
-<Link to ="/login" >Login</Link>
-<Link to="/register">Register</Link>
-</div>
+<nav className="navbar navbar-light bg-light">
+<NavLink className="navbar-brand" to ="/login" >Login</NavLink>
+<NavLink className="navbar-brand"to="/register">Register</NavLink>
+</nav>
+
     )
 }
 export default Navbar
