@@ -25,17 +25,17 @@ const dataSchema=new mongoose.Schema({
     }
 })
 const Data=mongoose.model("Data",dataSchema)
-async function createData(){
-    const data=new Data({
-    userId: 1,
-      id: 1,
-      title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-      body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+// async function createData(){
+//     const data=new Data({
+//     userId: 1,
+//       id: 1,
+//       title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+//       body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
     
-})
-const result=await data.save();
-console.log(result);
-}
-createData();
+// })
+// const result=await data.save();
+// console.log(result);
+// }
+//createData();
 exports.Data=Data;
 
