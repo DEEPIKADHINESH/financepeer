@@ -1,4 +1,5 @@
 const express=require("express");
+const Joi=require("joi")
 const { Data } = require("../modules/data");
 const route=express.Router();
 route.get("/",async(req,res)=>{
@@ -12,18 +13,34 @@ route.get("/:id",async(req,res)=>{
     res.send(result)
 })
 route.post("/",async(req,res)=>{
+    const {error}=validateData(req.body)
+    if(error)
+    res.status(400).send(error.details[0].message);
      let result=new Data({userId:req.body.userId,title:req.body.title,body:req.body.body});
      result=await result.save();
      res.send(result)
 })
 route.put("/:id",async(req,res)=>{
+    const {error}=validateData(req.body);
+    if(error)
+    res.status(400).send(error.details[0].message)
     const result=await Data.findByIdAndUpdate(req.params.id,
         {title:req.body.title,body:req.body.body},
         {new:true})
+        if(!result)
+        res.status(404).send("The data with giveen id is not found")
         res.send(result)
 })
 route.delete("/:id",async(req,res)=>{
     const result=await Data.findByIdAndRemove(req.params.id)
+    if(!result)
+    res.status(404).send("The data with given id is not found")
     res.send(result);
 })
+function validateData(result){
+  const  schema={userId:Joi.number().min(0).max(100).required(),
+title:Joi.string().min(5).max(255).required(),
+body:Joi.string().min(5).max(255).required()}
+return Joi.validate(result,schema)
+}
 module.exports=route;
