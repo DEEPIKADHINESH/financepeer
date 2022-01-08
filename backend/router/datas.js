@@ -2,6 +2,8 @@ const express=require("express");
 const Joi=require("joi")
 const { Data } = require("../modules/data");
 const route=express.Router();
+const auth=require("../middleware/auth")
+const admin=require("../middleware/admin")
 route.get("/",async(req,res)=>{
    const result=await Data.find().sort("id");
    res.status(200).send(result)
@@ -12,7 +14,7 @@ route.get("/:id",async(req,res)=>{
     res.status(404).send("the data with given id is notfound")
     res.send(result)
 })
-route.post("/",async(req,res)=>{
+route.post("/",auth,async(req,res)=>{
     const {error}=validateData(req.body)
     if(error)
     res.status(400).send(error.details[0].message);
@@ -20,7 +22,7 @@ route.post("/",async(req,res)=>{
      result=await result.save();
      res.send(result)
 })
-route.put("/:id",async(req,res)=>{
+route.put("/:id",auth,async(req,res)=>{
     const {error}=validateData(req.body);
     if(error)
     res.status(400).send(error.details[0].message)
@@ -31,7 +33,7 @@ route.put("/:id",async(req,res)=>{
         res.status(404).send("The data with giveen id is not found")
         res.send(result)
 })
-route.delete("/:id",async(req,res)=>{
+route.delete("/:id",[auth,admin],async(req,res)=>{
     const result=await Data.findByIdAndRemove(req.params.id)
     if(!result)
     res.status(404).send("The data with given id is not found")

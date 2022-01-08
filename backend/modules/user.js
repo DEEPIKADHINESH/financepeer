@@ -19,11 +19,12 @@ const userSchema=mongoose.Schema({
         minlength:5,
         maxlength:255,
         required:true
-    }
+    },
+    isAdmin:Boolean
 })
 
 userSchema.methods.generateAuthToken=function(){
-    const token=jwt.sign({_id:this._id},"jwtprivatekey")
+    const token=jwt.sign({_id:this.id,isAdmin:this.isAdmin},"jwtprivatekey")
     return token;
 }
 const User=mongoose.model("User",userSchema);

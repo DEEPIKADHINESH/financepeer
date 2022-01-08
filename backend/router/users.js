@@ -1,15 +1,20 @@
 const express=require("express")
 const route=express.Router();
 const {User}=require("../modules/user");
-const bcrypt=require("bcrypt")
-const Joi=require("joi")
+const bcrypt=require("bcrypt");
+const Joi=require("joi");
+const auth=require("../middleware/auth")
+route.get("/",auth,async(req,res)=>{
+    const user=await User.findById(req.user._id)
+    res.send(user)
+})
 route.post("/",async(req,res)=>{
     const {error}=userValidate(req.body)
     if(error)
-    return res.status(400).send(error.details[0].message)
+    return res.status(404).send(error.details[0].message)
     let user=await User.findOne({email:req.body.email})
     if(user)
-   return res.status(401).send("the user is already registered")
+   return res.status(400).send("the user is already registered")
     user=new User({
         name:req.body.name,
         email:req.body.email,
