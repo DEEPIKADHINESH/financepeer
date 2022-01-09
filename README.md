@@ -8,6 +8,7 @@ Here i have maken the email has unique property (already registered email can't 
 After creating the account the person are provided with jsonwebtoken.By using the token he can able to make the change.
 To delete the data the person want to be both authorized user and admin.
 If the person has already created the account their email and password are checked and the token is provided.If either one is wrong the server will throw invalid username or password and the token will not be provided.
-
+UNIT TESTING
+Here created the unit test to check wheater the generated auth token is correct ot wrong
 
 
