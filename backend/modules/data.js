@@ -5,12 +5,6 @@ const dataSchema=new mongoose.Schema({
         min:0,
         max:255
     },
-    id:{
-       type:Number,
-       min:0,
-       max:255,
-       unique:true
-    },
     title:{
         type:String,
         required:true,
@@ -36,6 +30,6 @@ const Data=mongoose.model("Data",dataSchema)
 // const result=await data.save();
 // console.log(result);
 // }
-//createData();
+// createData();
 exports.Data=Data;
 

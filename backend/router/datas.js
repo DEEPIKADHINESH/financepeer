@@ -29,14 +29,13 @@ route.put("/:id",auth,async(req,res)=>{
     const result=await Data.findByIdAndUpdate(req.params.id,
         {title:req.body.title,body:req.body.body},
         {new:true})
-        if(!result)
-        res.status(404).send("The data with giveen id is not found")
+        if(!result)return res.status(404).send("The data with giveen id is not found")
         res.send(result)
 })
 route.delete("/:id",[auth,admin],async(req,res)=>{
     const result=await Data.findByIdAndRemove(req.params.id)
     if(!result)
-    res.status(404).send("The data with given id is not found")
+   return res.status(404).send("The data with given id is not found")
     res.send(result);
 })
 function validateData(result){
