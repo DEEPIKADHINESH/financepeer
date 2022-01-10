@@ -16,7 +16,7 @@ class Login extends Component{
 
     render(){
         return(
-            <div>
+            <div className="col-sm-6 offset-sm-3">
               <h1>LOGIN</h1>
                 <form onClick={this.handleSubmit}>
                     <label htmlFor="email" >Enter the email</label><br/>
@@ -28,6 +28,7 @@ class Login extends Component{
                     value={this.state.account.password}
                     onChange={this.handleChange}></input>
                 </form>
+                
                 <Link className="btn btn-primary"to="/data">LOGIN</Link>
             </div>
             
